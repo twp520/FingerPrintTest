@@ -31,12 +31,16 @@ public void onAuthenticationError(int errMsgId, CharSequence errString);
  
 //指纹图像太嘈杂由于在传感器上可疑或检测到的污垢
 FingerprintManager.FINGERPRINT_ACQUIRED_IMAGER_DIRTY:
+
 //皮肤太干
 FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT:
+
 //只检测到一个局部指纹图像                 
 FingerprintManager.FINGERPRINT_ACQUIRED_PARTIAL:
+
 //指纹图像是不完整的，由于快速运动。
 FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST:
+
 //指纹图像是不可读的
 FingerprintManager.FINGERPRINT_ACQUIRED_TOO_SLOW:
                    
