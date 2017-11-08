@@ -27,26 +27,18 @@ public void onAuthenticationError(int errMsgId, CharSequence errString);
  //其实这个时候，传感器还是在工作的。
  public void onAuthenticationHelp(int helpMsgId, CharSequence helpString);
  其中 helpMsgId我翻译了一下
- switch (helpMsgId) {
-                case FingerprintManager.FINGERPRINT_ACQUIRED_GOOD:
-                    setResultInfo("", Color.YELLOW);
-                    break;
-                case FingerprintManager.FINGERPRINT_ACQUIRED_IMAGER_DIRTY:
-                    setResultInfo("指纹图像太嘈杂由于在传感器上可疑或检测到的污垢", Color.YELLOW);
-                    break;
-                case FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT:
-                    setResultInfo("皮肤太干", Color.YELLOW);
-                    break;
-                case FingerprintManager.FINGERPRINT_ACQUIRED_PARTIAL:
-                    setResultInfo("只检测到一个局部指纹图像", Color.YELLOW);
-                    break;
-                case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST:
-                    setResultInfo("指纹图像是不完整的，由于快速运动。", Color.YELLOW);
-                    break;
-                case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_SLOW:
-                    setResultInfo("指纹图像是不可读的", Color.YELLOW);
-                    break;
-            }
+ //指纹图像太嘈杂由于在传感器上可疑或检测到的污垢
+FingerprintManager.FINGERPRINT_ACQUIRED_IMAGER_DIRTY:
+//皮肤太干
+FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT:
+//只检测到一个局部指纹图像                 
+FingerprintManager.FINGERPRINT_ACQUIRED_PARTIAL:
+//指纹图像是不完整的，由于快速运动。
+FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST:
+//指纹图像是不可读的
+FingerprintManager.FINGERPRINT_ACQUIRED_TOO_SLOW:
+                   
+
 
  //认证成功
  public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result);
