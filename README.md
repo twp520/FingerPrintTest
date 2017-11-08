@@ -26,8 +26,10 @@ public void onAuthenticationError(int errMsgId, CharSequence errString);
  //发生可以恢复的错误。比如手指离开的太快，还没采集结束
  //其实这个时候，传感器还是在工作的。
  public void onAuthenticationHelp(int helpMsgId, CharSequence helpString);
+ 
  其中 helpMsgId我翻译了一下
- //指纹图像太嘈杂由于在传感器上可疑或检测到的污垢
+ 
+//指纹图像太嘈杂由于在传感器上可疑或检测到的污垢
 FingerprintManager.FINGERPRINT_ACQUIRED_IMAGER_DIRTY:
 //皮肤太干
 FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT:
