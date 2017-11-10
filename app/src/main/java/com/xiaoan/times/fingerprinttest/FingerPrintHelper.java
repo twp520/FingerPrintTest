@@ -2,6 +2,8 @@ package com.xiaoan.times.fingerprinttest;
 
 import android.app.KeyguardManager;
 import android.content.Context;
+import android.graphics.Color;
+import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
 import android.support.v4.os.CancellationSignal;
@@ -73,6 +75,29 @@ public class FingerPrintHelper {
         cancel = null;
     }
 
+    public String switchHelpCode(int helpMsgId) {
+        String msg = "";
+        switch (helpMsgId) {
+            case FingerprintManager.FINGERPRINT_ACQUIRED_GOOD:
+                break;
+            case FingerprintManager.FINGERPRINT_ACQUIRED_IMAGER_DIRTY:
+                msg = "指纹图像太嘈杂由于在传感器上可疑或检测到的污垢";
+                break;
+            case FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT:
+                msg = "皮肤太干";
+                break;
+            case FingerprintManager.FINGERPRINT_ACQUIRED_PARTIAL:
+                msg = "只检测到一个局部指纹图像";
+                break;
+            case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST:
+                msg = "指纹图像是不完整的，由于快速运动。";
+                break;
+            case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_SLOW:
+                msg = "指纹图像是不可读的";
+                break;
+        }
+        return msg;
+    }
 
     class MyFingerCallBack extends FingerprintManagerCompat.AuthenticationCallback {
         @Override
