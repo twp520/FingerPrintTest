@@ -2,7 +2,6 @@ package com.xiaoan.times.fingerprinttest;
 
 import android.app.KeyguardManager;
 import android.content.Context;
-import android.graphics.Color;
 import android.hardware.fingerprint.FingerprintManager;
 import android.os.Build;
 import android.support.v4.hardware.fingerprint.FingerprintManagerCompat;
@@ -39,17 +38,19 @@ public class FingerPrintHelper {
      * @return 检查结果
      */
     public int checkSuopprtFingerPrint() {
-        if (!managerCompat.isHardwareDetected()) {
-            return TYPE_NO_HARDWAREDETECTED;
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.M) {
+            return TYPE_NO_SDKLEVEL;
         }
         if (!keyguardManager.isDeviceSecure()) {
             return TYPE_NO_DEVICESECURE;
         }
+
+        if (!managerCompat.isHardwareDetected()) {
+            return TYPE_NO_HARDWAREDETECTED;
+        }
+
         if (!managerCompat.hasEnrolledFingerprints()) {
             return TYPE_NO_ENROLLEDFINGERPRINTS;
-        }
-        if (Build.VERSION.SDK_INT < 23) {
-            return TYPE_NO_SDKLEVEL;
         }
         return TYPE_SUCCESS;
     }
@@ -99,64 +100,5 @@ public class FingerPrintHelper {
         return msg;
     }
 
-    class MyFingerCallBack extends FingerprintManagerCompat.AuthenticationCallback {
-        @Override
-        public void onAuthenticationError(int errMsgId, CharSequence errString) {
-            //发生不可恢复的错误，比如传感器异常
-
-        }
-
-        @Override
-        public void onAuthenticationFailed() {
-            //认证失败，表示本次采集的指纹信息和之前注册的指纹信息不一致
-
-        }
-
-        @Override
-        public void onAuthenticationHelp(int helpMsgId, CharSequence helpString) {
-            //发生可以恢复的错误。比如手指离开的太快，还没采集结束
-//            switch (helpMsgId) {
-//                case FingerprintManager.FINGERPRINT_ACQUIRED_GOOD:
-//                    break;
-//                case FingerprintManager.FINGERPRINT_ACQUIRED_IMAGER_DIRTY:
-//                    setResultInfo("指纹图像太嘈杂由于在传感器上可疑或检测到的污垢", Color.YELLOW);
-//                    break;
-//                case FingerprintManager.FINGERPRINT_ACQUIRED_INSUFFICIENT:
-//                    setResultInfo("皮肤太干", Color.YELLOW);
-//                    break;
-//                case FingerprintManager.FINGERPRINT_ACQUIRED_PARTIAL:
-//                    setResultInfo("只检测到一个局部指纹图像", Color.YELLOW);
-//                    break;
-//                case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_FAST:
-//                    setResultInfo("指纹图像是不完整的，由于快速运动。", Color.YELLOW);
-//                    break;
-//                case FingerprintManager.FINGERPRINT_ACQUIRED_TOO_SLOW:
-//                    setResultInfo("指纹图像是不可读的", Color.YELLOW);
-//                    break;
-//            }
-        }
-
-        @Override
-        public void onAuthenticationSucceeded(FingerprintManagerCompat.AuthenticationResult result) {
-            //认证成功
-//            try {
-//                result.getCryptoObject().getCipher().doFinal();
-//                //只有没有发生异常的情况才表示认证完全成功
-//                tv.setText("指纹认证成功！！");
-//                tv.setTextColor(Color.GREEN);
-//                btn_sign.setEnabled(true);
-//                btn_cancel.setEnabled(false);
-//            } catch (IllegalBlockSizeException e) {
-//                e.printStackTrace();
-//                tv.setText("指纹认证失败！！发生拦截！！危险！！");
-//                tv.setTextColor(Color.RED);
-//            } catch (BadPaddingException e) {
-//                e.printStackTrace();
-//                tv.setText("指纹认证失败！！发生拦截！！危险！！");
-//                tv.setTextColor(Color.RED);
-//            }
-
-        }
-    }
 }
 

@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity implements View.OnClickListener {
     private Button btn_sign, btn_cancel;
@@ -30,9 +31,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     }
 
     private void initFingerPrint() {
-
         manageer = new FingerPrintHelper(this, "com.xiaoan.times.fingerprinttest.fingerprint_authentication_key");
         if (manageer.checkSuopprtFingerPrint() != FingerPrintHelper.TYPE_SUCCESS) {
+            Toast.makeText(this, "不支持 code ="+manageer.checkSuopprtFingerPrint(), Toast.LENGTH_SHORT).show();
             btn_sign.setEnabled(false);
             return;
         }
